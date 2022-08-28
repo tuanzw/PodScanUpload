@@ -26,22 +26,19 @@ const qrCodeSuccessCallback = (decodedText, decodedResult) => {
 const config = { fps: 10, qrbox: { width: 250, height: 250 } };
 
 scanBtn.addEventListener("click", () => {
-    if (toogleScan == 1){
-        html5QrCode.start({ facingMode: { exact: "environment"} }, config, qrCodeSuccessCallback);
-        toogleScan = 0;
-    }else{
-        html5QrCode.stop().then((ignore) => {
-            // QR Code scanning is stopped.
-          }).catch((err) => {
-            // Stop failed, handle it.
-          });
-        toogleScan = 1;
-    }
+    html5QrCode.start({ facingMode: { exact: "environment"} }, config, qrCodeSuccessCallback);
+    toogleScan = 0;
 });
 
 selctBtn.addEventListener("click", () => {
-    fileinput.click();
-    dnNo.value = ""
+    if (dnNo.value !=  ""){
+        html5QrCode.stop().then((ignore) => {
+            // QR Code scanning is stopped.
+        }).catch((err) => {
+            // Stop failed, handle it.
+        });
+        fileinput.click();
+    }
 });
 
 fileinput.addEventListener("change", e => {
