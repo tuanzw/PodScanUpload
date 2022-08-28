@@ -60,8 +60,9 @@ clearBtn.addEventListener("click", () => {
         qrcodeClose();
     }
     catch(e){
-        
+
     }
     fileinput.value = "";
     dnNo.value = "";
+    document.querySelector("img").style.display = "none";
 });
