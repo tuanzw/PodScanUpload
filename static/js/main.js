@@ -10,16 +10,46 @@
 // let html5QrcodeScanner = new Html5QrcodeScanner("reader",{ fps: 10, qrbox: {width: 250, height: 250} },/* verbose= */ false);
 // html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 const scanBtn = document.getElementById("qrscan");
+const selctBtn = document.getElementById("select");
+const uploadBtn = document.getElementById("upload");
+const fileinput = document.getElementById("formFile");
 const dnNo = document.getElementById("dnNo");
 
+const toogleScan = 1;
 
 const html5QrCode = new Html5Qrcode("reader");
 
 const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-    dnNo.value = decodedText
+    dnNo.value = decodedText;
+    uploadBtn.disabled = false;
 };
 const config = { fps: 10, qrbox: { width: 250, height: 250 } };
 
 scanBtn.addEventListener("click", () => {
-    html5QrCode.start({ facingMode: { exact: "environment"} }, config, qrCodeSuccessCallback);
+    if (toogleScan == 1){
+        html5QrCode.start({ facingMode: { exact: "environment"} }, config, qrCodeSuccessCallback);
+        toogleScan = 0;
+    }else{
+        html5QrCode.stop().then((ignore) => {
+            // QR Code scanning is stopped.
+          }).catch((err) => {
+            // Stop failed, handle it.
+          });
+        toogleScan = 1;
+    }
+});
+
+selctBtn.addEventListener("click", () => {
+    fileinput.click();
+    dnNo.value = ""
+});
+
+fileinput.addEventListener("change", e => {
+    if (e.target.files.length == 0) {
+        // No file selected, ignore 
+        return;
+    }
+    const imageFile = e.target.files[0];
+    document.querySelector("img").src = URL.createObjectURL(imageFile);
+    document.querySelector("img").style.display = "block";
 });
