@@ -12,6 +12,7 @@
 const scanBtn = document.getElementById("qrscan");
 const selctBtn = document.getElementById("select");
 const uploadBtn = document.getElementById("upload");
+const clearBtn = document.getElementById("clear");
 const fileinput = document.getElementById("formFile");
 const dnNo = document.getElementById("dnNo");
 
@@ -23,6 +24,14 @@ const qrCodeSuccessCallback = (decodedText, decodedResult) => {
     dnNo.value = decodedText;
     uploadBtn.disabled = false;
 };
+function qrcodeClose(){
+    html5QrCode.stop().then((ignore) => {
+        // QR Code scanning is stopped.
+    }).catch((err) => {
+        // Stop failed, handle it.
+    });
+}
+
 const config = { fps: 10, qrbox: { width: 250, height: 250 } };
 
 scanBtn.addEventListener("click", () => {
@@ -32,11 +41,7 @@ scanBtn.addEventListener("click", () => {
 
 selctBtn.addEventListener("click", () => {
     if (dnNo.value !=  ""){
-        html5QrCode.stop().then((ignore) => {
-            // QR Code scanning is stopped.
-        }).catch((err) => {
-            // Stop failed, handle it.
-        });
+        qrcodeClose();
         fileinput.click();
     }
 });
@@ -49,4 +54,10 @@ fileinput.addEventListener("change", e => {
     const imageFile = e.target.files[0];
     document.querySelector("img").src = URL.createObjectURL(imageFile);
     document.querySelector("img").style.display = "block";
+});
+
+clearBtn.addEventListener("click", () => {
+    qrcodeClose();
+    fileinput.value = "";
+    dnNo.value = "";
 });
