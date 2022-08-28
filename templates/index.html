@@ -1,17 +1,54 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML5 QRCode</title>
+    <title>POD App</title>
 
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 </head>
 <body>
-    <h1>HTML5 QRCode scan</h1>
+    <h1>POD App</h1>
     <div id="reader" width="600px"></div>
 
     <script src="../static/js/main.js"></script>
 </body>
-</html>
+</html> -->
+
+
+{% extends 'base.html' %}
+
+{% block title %} Proof of Delivery App {% endblock %}
+
+{% block body %}
+    <div id="reader" width="600px"></div>
+    <!-- <div id="reader" width="600px" height="600px"></div>
+    <div class="img-wrapper d-flex justify-content-center p-2">
+        <img src="#" alt="Couldn't load the image" class="img-fluid rounded">
+    </div>
+    <form action="upload" enctype="multipart/form-data" method="POST">
+        <div class="ratio-4-3">
+            <input class="form-control" type="file" name="pic" id="formFile" accept="image/*" hidden>
+            <span class="icon-input-btn">
+                <i class="bi bi-folder2-open"></i> 
+                <input type="button" class="btn btn-primary" value="Select" id="select">
+            </span>
+            <span class="icon-input-btn">
+                <i class="bi bi-cloud-arrow-up"></i> 
+                <input type="submit" class="btn btn-success" value="Upload" id="upload">
+            </span>
+            <span class="icon-input-btn">
+                <i class="bi bi-x-square"></i> 
+                <input type="button" class="btn btn-secondary" value="Clear" id="clear">
+            </span>
+            
+            <input type="text" readonly class="form-control-plaintext" name="buff" id="dnNo" required>
+        </div>
+    </form>
+    <div class="alert alert-primary" role="alert" id="msg">
+        {% for message in get_flashed_messages() %}
+                <p>{{message}}</p>
+        {% endfor %}
+    </div> -->
+{% endblock %}
