@@ -22,7 +22,6 @@ const html5QrCode = new Html5Qrcode("reader");
 
 const qrCodeSuccessCallback = (decodedText, decodedResult) => {
     dnNo.value = decodedText;
-    uploadBtn.disabled = false;
 };
 function qrcodeClose(){
     html5QrCode.stop().then((ignore) => {
@@ -57,7 +56,12 @@ fileinput.addEventListener("change", e => {
 });
 
 clearBtn.addEventListener("click", () => {
-    qrcodeClose();
+    try{
+        qrcodeClose();
+    }
+    catch(e){
+        
+    }
     fileinput.value = "";
     dnNo.value = "";
 });
